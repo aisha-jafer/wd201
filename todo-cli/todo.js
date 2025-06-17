@@ -8,96 +8,21 @@ const todoList = () => {
   };
 
   const overdue = () => {
-    const today = new Date(
-      dateToday.getFullYear(),
-      dateToday.getMonth(),
-      dateToday.getDate()
-    );
-    return all.filter((item) => {
-      if (item.dueDate) {
-        const itemDueDate = new Date(
-          item.dueDate.getFullYear(),
-          item.dueDate.getMonth(),
-          item.dueDate.getDate()
-        );
-        return itemDueDate < today && !item.completed;
-      }
-      return false;
-    });
     // Write the date check condition here and return the array
     // of overdue items accordingly.
   };
 
   const dueToday = () => {
-    const today = new Date(
-      dateToday.getFullYear(),
-      dateToday.getMonth(),
-      dateToday.getDate()
-    );
-    return all.filter((item) => {
-      if (item.dueDate) {
-        const itemDueDate = new Date(
-          item.dueDate.getFullYear(),
-          item.dueDate.getMonth(),
-          item.dueDate.getDate()
-        );
-        return itemDueDate.getTime() === today.getTime() && !item.completed;
-      }
-      return false;
-    });
-
-    // This function checks if the due date of the todo item
     // Write the date check condition here and return the array
     // of todo items that are due today accordingly.
   };
 
   const dueLater = () => {
-    const today = new Date(
-      dateToday.getFullYear(),
-      dateToday.getMonth(),
-      dateToday.getDate()
-    );
-    return all.filter((item) => {
-      if (item.dueDate) {
-        const itemDueDate = new Date(
-          item.dueDate.getFullYear(),
-          item.dueDate.getMonth(),
-          item.dueDate.getDate()
-        );
-        return itemDueDate > today && !item.completed;
-      }
-      return false;
-    });
     // Write the date check condition here and return the array
     // of todo items that are due later accordingly.
   };
 
   const toDisplayableList = (list) => {
-    let output = "";
-    const today = new Date(
-      dateToday.getFullYear(),
-      dateToday.getMonth(),
-      dateToday.getDate()
-    );
-    list.forEach((item) => {
-      let checkbox = item.completed ? "[x]" : "[ ]";
-      let dateString = "";
-      if (item.dueDate) {
-        const itemDueDate = new Date(
-          item.dueDate.getFullYear(),
-          item.dueDate.getMonth(),
-          item.dueDate.getDate()
-        );
-        if (itemDueDate.getTime() !== today.getTime()) {
-          const day = String(item.dueDate.getDate()).padStart(2, "0");
-          const month = String(item.dueDate.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
-          dateString = ` ${day}-${month} `;
-        }
-      }
-      output += `${checkbox} ${item.title}${dateString}\n`;
-    });
-    return output.trim();
-
     // Format the To-Do list here, and return the output string
     // as per the format given above.
   };
