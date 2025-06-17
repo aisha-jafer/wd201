@@ -1,9 +1,6 @@
 const http = require("http");
 const fs = require("fs");
-const minimist = require("minimist");
-const args = minimist(process.argv.slice(2));
-// Now we can access our arguments by name
-const port = args.port || 3000;
+const parseArgs = require("minimist");
 
 let homeContent = "";
 let projectContent = "";
@@ -30,11 +27,14 @@ fs.readFile("registration.html", (err, registration) => {
   registrationContent = registration;
 });
 
+const args = parseArgs(process.argv.slice(2));
+const port = args.port || 3000;
+
 http
   .createServer((request, response) => {
-    let url = request.url;
-    response.writeHeader(200, { "Content-Type": "text/html" });
-    switch (url) {
+    response.writeHead(200, { "Content-Type": "text/html" });
+
+    switch (request.url) {
       case "/project":
         response.write(projectContent);
         break;
@@ -45,5 +45,8 @@ http
         response.write(homeContent);
         break;
     }
+    response.end();
   })
-  .listen(port);
+  .listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
